@@ -36,7 +36,7 @@ public class Memo {
         StringBuilder s = new StringBuilder();
 
         s.append(id).append(": ");
-        s.append(memo).append("\n");
+        s.append(memo);
 
         return s.toString();
 
