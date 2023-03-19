@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
         model.init(this);
 
+        /* Apply click event handlers */
+
         binding.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

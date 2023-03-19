@@ -32,13 +32,11 @@ public class MemoModel extends AbstractModel {
 
     }
 
-
-
     public void setMemoToAdd(String newMemo) {
 
         this.memoToAdd = newMemo;
 
-        db.insertMemo(newMemo);
+        db.insertMemo(memoToAdd);
 
         Log.i(TAG, "Memo Added: " + newMemo);
 
@@ -52,7 +50,7 @@ public class MemoModel extends AbstractModel {
 
         this.memoToDelete = memoId;
 
-        db.deleteMemo(memoId);
+        db.deleteMemo(memoToDelete);
 
         Log.i(TAG, "ID of Deleted Memo: " + memoId);
 
@@ -66,23 +64,24 @@ public class MemoModel extends AbstractModel {
 
         String originalList = db.getAllMemos();
 
-        if(originalList.equals("")){
-            setMemoList(EMPTY_TEXT);
-        }
-        else{
-            setMemoList(originalList);
-        }
+        setMemoList(originalList);
 
     }
 
     public void setMemoList(String newText){
 
         String oldText = this.memoList;
-        this.memoList = newText;
 
-        Log.i(TAG, "MemoList change from \n" + oldText + " to \n" + newText);
+        if(newText.equals("")){
+            this.memoList = EMPTY_TEXT;
+        }
+        else{
+            this.memoList = newText;
+        }
 
-        firePropertyChange(MemoController.MEMOLIST_PROPERTY, oldText, newText);
+        Log.i(TAG, "MemoList change from \n" + oldText + " to \n" + memoList);
+
+        firePropertyChange(MemoController.MEMOLIST_PROPERTY, oldText, memoList);
 
     }
 
