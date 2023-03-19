@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.memopad.databinding.ActivityMainBinding;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
             public void onClick(View v) {
 
                 String memoText = binding.editTextMemoToAdd.getText().toString();
+                binding.editTextMemoToAdd.setText("");
                 addMemo(memoText);
 
             }
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
             public void onClick(View v) {
 
                 String memoId = binding.editTextMemoToDelete.getText().toString();
+                binding.editTextMemoToDelete.setText("");
                 deleteMemo(memoId);
 
             }
@@ -87,11 +90,33 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
     public void addMemo(String memoText){
 
-        controller.changeMemoToAdd(memoText);
+        try{
+            if(memoText.equals("")){
+                throw new IllegalArgumentException();
+            }
+
+            controller.changeMemoToAdd(memoText);
+        }
+        catch(Exception e){
+            Toast toast = Toast.makeText(this, "Enter a valid memo", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
     }
 
     public void deleteMemo(String memoId){
+
+        try{
+            if(memoId.equals("")){
+                throw new IllegalArgumentException();
+            }
+
+            controller.changeMemoToDelete(memoId);
+        }
+        catch(Exception e){
+            Toast toast = Toast.makeText(this, "Enter a valid memo ID", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
     }
 

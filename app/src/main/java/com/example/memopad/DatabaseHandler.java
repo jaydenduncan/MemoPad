@@ -53,6 +53,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public void deleteMemo(String memoId){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_MEMOS, "_id=?", new String[]{memoId});
+
+        db.close();
+
+    }
+
     public String deleteAllMemos() {
 
         SQLiteDatabase db = this.getWritableDatabase();

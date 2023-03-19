@@ -20,7 +20,7 @@ public class MemoController extends AbstractController
         setModelProperty(MEMOTOADD_PROPERTY, newMemo);
     }
 
-    public void changeMemoToDelete(int memoId) {
+    public void changeMemoToDelete(String memoId) {
         setModelProperty(MEMOTODELETE_PROPERTY, memoId);
     }
 

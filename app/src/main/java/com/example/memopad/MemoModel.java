@@ -11,7 +11,7 @@ public class MemoModel extends AbstractModel {
     private DatabaseHandler db;
     private String memoList;
     private String memoToAdd;
-    private int memoToDelete;
+    private String memoToDelete;
 
     /*
      * Initialize the model elements to known default values.  We use the setter
@@ -26,7 +26,7 @@ public class MemoModel extends AbstractModel {
 
         memoList = "";
         memoToAdd = "";
-        memoToDelete = 0;
+        memoToDelete = "";
 
         displayInitialList();
 
@@ -48,10 +48,17 @@ public class MemoModel extends AbstractModel {
 
     }
 
-    public void setMemoToDelete(int memoId) {
+    public void setMemoToDelete(String memoId){
 
         this.memoToDelete = memoId;
 
+        db.deleteMemo(memoId);
+
+        Log.i(TAG, "ID of Deleted Memo: " + memoId);
+
+        String updatedList = db.getAllMemos();
+
+        setMemoList(updatedList);
 
     }
 
@@ -73,7 +80,7 @@ public class MemoModel extends AbstractModel {
         String oldText = this.memoList;
         this.memoList = newText;
 
-        Log.i(TAG, "MemoList change from " + oldText + " to " + newText);
+        Log.i(TAG, "MemoList change from \n" + oldText + " to \n" + newText);
 
         firePropertyChange(MemoController.MEMOLIST_PROPERTY, oldText, newText);
 
